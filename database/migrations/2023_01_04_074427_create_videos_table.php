@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->string('title')->nullable();
             $table->string('content')->nullable();
-            $table->string('url')->nullable();
+            $table->string('src')->nullable();
         });
     }
 

@@ -130,7 +130,7 @@
                 </video> --}}
 
                 {{-- 使用資料庫的資料來抓取影片連結 --}}
-                <video id="TopVideo" src="{{$topvideo[0]->url}}" autoplay loop muted>
+                <video id="TopVideo" src="{{$topvideo[0]->src}}" autoplay loop muted>
                 </video>
                 <div class="MuteButton" id="MB" onclick="MuteButton()"><img class="MuteImage"
                         src="{{ asset('/OtherImage/volume-high-unmuted.svg') }}" alt=""></div>
@@ -172,7 +172,7 @@
                             <div data-type="img" class="C2sImg CI3"></div>
                             <div data-type="img" class="C2sImg CI4"></div>
                             <div data-type="img" class="C2sImg CI5"></div>
-                            <video data-type="vid" src="{{ asset('/NewVideos/TearsInRain.mp4') }}" class="C2sImg CV1"
+                            {{-- <video data-type="vid" src="{{ asset('/NewVideos/TearsInRain.mp4') }}" class="C2sImg CV1"
                                 poster="{{ asset('/NewVideos/poster/TearsinRain3.jpeg') }}"></video>
                             <video data-type="vid"
                                 src="{{ asset('/NewVideos/EdgerunnersUpdate(Patch 1.6)OfficialLaunchTrailerEU.mp4') }}"
@@ -186,7 +186,14 @@
                                 src="{{ asset('/NewVideos/The Matrix Resurrections Official Trailer 1 TM.mp4') }}"
                                 class="C2sImg CV4" poster="./NewVideos/poster/TheMatrixPoster.jpg')}}"></video>
                             <video data-type="vid" src="{{ asset('/NewVideos/GHOST IN THE SHELL.mp4') }}"
-                                class="C2sImg CV5" poster="{{ asset('/NewVideos/poster/ghostposter.png') }}"></video>
+                                class="C2sImg CV5" poster="{{ asset('/NewVideos/poster/ghostposter.png') }}"></video> --}}
+
+                                @for ($i=0;$i<5;$i++)
+
+                                <video data-type="vid" src="{{ $c2svido[$i]->src }}" class="C2sImg CV1"
+                                poster="{{ $c2svido[$i]->poster }}"></video>
+
+                                @endfor
                         </div>
                         <div class="C2Switch"><img src="{{ asset('/OtherImage/circle-chevron-right-solid.svg') }}"
                                 alt="">
@@ -315,7 +322,7 @@
 
                      {{-- {{$data[0]->title}}; --}}
 
-                     {{-- 2.印出所有的回傳資料 --}}
+                     {{-- 2.印出所有的回傳資料，$item是每個索引值 --}}
                      @foreach ($data as $item)
 
                      {{$item->title}}

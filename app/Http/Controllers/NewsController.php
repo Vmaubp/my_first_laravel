@@ -41,10 +41,14 @@ class NewsController extends Controller
         // dd(gettype($data));
 
         //抓取TopVideo的影片
-        $topvideo = DB::table('videos')->where('title', 'topvideo')->get('url');
+        $topvideo = DB::table('topvideos')->where('title', 'cyber')->get();
         // dd($topvideo);
 
-        return view('cyberworld', ['data' => $data, 'text' => $text, 'topvideo' => $topvideo]);
+        //抓取第2區的影片
+        $c2svido = DB::table('videos')->get();
+
+        //回傳路由跳轉+撈取到的資料庫資料
+        return view('cyberworld', ['data' => $data, 'text' => $text, 'topvideo' => $topvideo, 'c2svido' => $c2svido]);
     }
 }
 
