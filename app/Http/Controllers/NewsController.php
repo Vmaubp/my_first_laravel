@@ -50,6 +50,11 @@ class NewsController extends Controller
         //回傳路由跳轉+撈取到的資料庫資料
         return view('cyberworld', ['data' => $data, 'text' => $text, 'topvideo' => $topvideo, 'c2svido' => $c2svido]);
     }
+
+    //路由跳轉到留言板頁面(注意/下一層這裡改為使用.代替)
+    public function comment(){
+        return view('comment.comment');
+    }
 }
 
 // <!-- 這裡是透過php artisan make:controller NewsControlnal 指令新增的自訂Controller -->

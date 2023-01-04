@@ -51,6 +51,10 @@ Route::get('/cyberworld', [NewsController::class, 'index']);
 //(可讀取)另一個指定讀取自訂Controller(NewsController)的方法
 // Route::get('/cyberworld', 'App\Http\Controllers\NewsController@index');
 
+//連結到留言板頁面
+Route::get('/comment', [NewsController::class, 'comment']);
+
+
 /////////////////////////////////////////////
 
 Route::get('/dashboard', function () {
