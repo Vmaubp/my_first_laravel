@@ -77,10 +77,12 @@
 </head>
 
 <body>
+    {{-- 黑幕浮動區塊 --}}
     <span class="BlackScreen"></span>
     <img class="ImgLarge"></img>
-    <img class="messagelist" name="messagelist" src="{{asset('/OtherImage/Pholltransparent.png')}}" alt="">
+    <img class="messagelist" name="messagelist" src="{{ asset('/OtherImage/Pholltransparent.png') }}" alt="">
     <video class="VideoLarge" src="" autoplay loop controls></video>
+
     <header>
         <nav class="NavTop">
             <span id="headerBlack">
@@ -90,7 +92,8 @@
                     <div><a href="#content5">TVSHOW</a></div>
                 </div>
 
-                <div id="DivLogoCenter"><img id="LogoCenter" class="Logo" src="{{asset('/Logo/CyberWorld Logo 04 三角 高斯模糊完成.png')}}">
+                <div id="DivLogoCenter"><img id="LogoCenter" class="Logo"
+                        src="{{ asset('/Logo/CyberWorld Logo 04 三角 高斯模糊完成.png') }}">
                 </div>
 
                 <div class="GuestOption">
@@ -105,7 +108,7 @@
             <div>
                 <div class="DivLeftListBack" onclick="CloseLeftList()"><span>X</span></div>
                 <div id="LeftList1">
-                    <img id="LeftListLogo" class="Logo" src="{{asset('/Logo/CyberWorld Logo 04 三角 高斯模糊完成.png')}}">
+                    <img id="LeftListLogo" class="Logo" src="{{ asset('/Logo/CyberWorld Logo 04 三角 高斯模糊完成.png') }}">
 
                 </div>
             </div>
@@ -123,12 +126,18 @@
         <div id="content">
             <!-- <img src="./OtherImage/dust.png" alt=""> -->
             <div id="content1">
-                <video id="TopVideo" src="{{asset('/NewVideos/CyberPunkTopdown1.mp4')}}" autoplay loop muted>
+                {{-- <video id="TopVideo" src="{{ asset('/NewVideos/CyberPunkTopdown1.mp4') }}" autoplay loop muted>
+                </video> --}}
+
+                {{-- 使用資料庫的資料來抓取影片連結 --}}
+                <video id="TopVideo" src="{{$topvideo[0]->url}}" autoplay loop muted>
                 </video>
                 <div class="MuteButton" id="MB" onclick="MuteButton()"><img class="MuteImage"
-                        src="{{asset('/OtherImage/volume-high-unmuted.svg')}}" alt=""></div>
-                <div class="Switch" id="SwitchLeft"><img src="{{asset('/OtherImage/circle-chevron-left-solid.svg')}}" alt=""></div>
-                <div class="Switch" id="SwitchRight"><img src="{{asset('/OtherImage/circle-chevron-right-solid.svg')}}" alt="">
+                        src="{{ asset('/OtherImage/volume-high-unmuted.svg') }}" alt=""></div>
+                <div class="Switch" id="SwitchLeft"><img src="{{ asset('/OtherImage/circle-chevron-left-solid.svg') }}"
+                        alt=""></div>
+                <div class="Switch" id="SwitchRight"><img
+                        src="{{ asset('/OtherImage/circle-chevron-right-solid.svg') }}" alt="">
                 </div>
                 <div class="Article">
                     <p>CyberPunk</p>
@@ -154,7 +163,8 @@
 
                     <!-- 小圖片清單 -->
                     <div data-type="img" class="C2Media">
-                        <div class="C2Switch"><img src="{{asset('/OtherImage/circle-chevron-left-solid.svg')}}" alt=""></div>
+                        <div class="C2Switch"><img src="{{ asset('/OtherImage/circle-chevron-left-solid.svg') }}"
+                                alt=""></div>
                         <div class="C2sDiv">
                             <div data-type="img" class="C2sImg CI1">
                             </div>
@@ -162,13 +172,24 @@
                             <div data-type="img" class="C2sImg CI3"></div>
                             <div data-type="img" class="C2sImg CI4"></div>
                             <div data-type="img" class="C2sImg CI5"></div>
-                            <video data-type="vid" src="{{asset('/NewVideos/TearsInRain.mp4')}}" class="C2sImg CV1" poster="{{asset('/NewVideos/poster/TearsinRain3.jpeg')}}"></video>
-                            <video data-type="vid" src="{{asset('/NewVideos/EdgerunnersUpdate(Patch 1.6)OfficialLaunchTrailerEU.mp4')}}" class="C2sImg CV2" poster="{{asset('/NewVideos/poster/EdgerunnersUpdatePoster2.jpg')}}"></video>
-                            <video data-type="vid" src="{{asset('/NewVideos/Cyberpunk Bartender Action VA-11 Hall-A Final TrailerVHA.mp4')}}" class="C2sImg CV3" poster="{{asset('/NewVideos/poster/va11ha11a_poster3.jpg')}}"></video>
-                            <video data-type="vid" src="{{asset('/NewVideos/The Matrix Resurrections Official Trailer 1 TM.mp4')}}" class="C2sImg CV4" poster="./NewVideos/poster/TheMatrixPoster.jpg')}}"></video>
-                            <video data-type="vid" src="{{asset('/NewVideos/GHOST IN THE SHELL.mp4')}}" class="C2sImg CV5" poster="{{asset('/NewVideos/poster/ghostposter.png')}}"></video>
+                            <video data-type="vid" src="{{ asset('/NewVideos/TearsInRain.mp4') }}" class="C2sImg CV1"
+                                poster="{{ asset('/NewVideos/poster/TearsinRain3.jpeg') }}"></video>
+                            <video data-type="vid"
+                                src="{{ asset('/NewVideos/EdgerunnersUpdate(Patch 1.6)OfficialLaunchTrailerEU.mp4') }}"
+                                class="C2sImg CV2"
+                                poster="{{ asset('/NewVideos/poster/EdgerunnersUpdatePoster2.jpg') }}"></video>
+                            <video data-type="vid"
+                                src="{{ asset('/NewVideos/Cyberpunk Bartender Action VA-11 Hall-A Final TrailerVHA.mp4') }}"
+                                class="C2sImg CV3"
+                                poster="{{ asset('/NewVideos/poster/va11ha11a_poster3.jpg') }}"></video>
+                            <video data-type="vid"
+                                src="{{ asset('/NewVideos/The Matrix Resurrections Official Trailer 1 TM.mp4') }}"
+                                class="C2sImg CV4" poster="./NewVideos/poster/TheMatrixPoster.jpg')}}"></video>
+                            <video data-type="vid" src="{{ asset('/NewVideos/GHOST IN THE SHELL.mp4') }}"
+                                class="C2sImg CV5" poster="{{ asset('/NewVideos/poster/ghostposter.png') }}"></video>
                         </div>
-                        <div class="C2Switch"><img src="{{asset('/OtherImage/circle-chevron-right-solid.svg')}}" alt="">
+                        <div class="C2Switch"><img src="{{ asset('/OtherImage/circle-chevron-right-solid.svg') }}"
+                                alt="">
                         </div>
                     </div>
                     <div class="change-media-btn">VIDEO</div>
@@ -184,7 +205,7 @@
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="{{asset('/Products/Screenshot_20221021_070958.jpg')}}" />
+                                <img src="{{ asset('/Products/Screenshot_20221021_070958.jpg') }}" />
                                 <div>
                                     <h1>VA-11 HALL-A 原聲帶</h1>
                                     <p>點擊圖片可放大、播放 ►</p>
@@ -194,7 +215,7 @@
 
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{asset('/Products/cobe.jpg')}}" />
+                                <img src="{{ asset('/Products/cobe.jpg') }}" />
                                 <div>
                                     <h1>卡比之星霓虹燈</h1>
                                     <p>點擊圖片可放大</p>
@@ -203,7 +224,7 @@
 
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{asset('/Products/room.jpg')}}"></img>
+                                <img src="{{ asset('/Products/room.jpg') }}"></img>
                                 <div>
                                     <h1>賽博龐克-電腦週邊</h1>
                                     <p>點擊圖片可放大、播放 ►</p>
@@ -212,7 +233,7 @@
                             </div>
                             <div class="swiper-slide">
 
-                                <video src="{{asset('/Products/fgo_fg.mp4')}}" autoplay loop muted></video>
+                                <video src="{{ asset('/Products/fgo_fg.mp4') }}" autoplay loop muted></video>
                                 <div>
                                     <h1>Saber Fate / Zero 模型</h1>
                                     <p>點擊圖片可放大、播放 ►</p>
@@ -221,7 +242,7 @@
 
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{asset('/Products/80sneoncyberpunkretrobeerlabelideaswanted.png')}}" />
+                                <img src="{{ asset('/Products/80sneoncyberpunkretrobeerlabelideaswanted.png') }}" />
                                 <div>
                                     <h1>80s賽博龐克復古啤酒</h1>
                                     <p>點擊圖片可放大</p>
@@ -230,7 +251,7 @@
 
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{asset('/Products/2077clothes.jpg')}}" />
+                                <img src="{{ asset('/Products/2077clothes.jpg') }}" />
                                 <div>
                                     <h1>《電馭叛客2077》-邊緣行者印刷服飾</h1>
                                     <p>點擊圖片可放大</p>
@@ -238,7 +259,7 @@
                                 </div>
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{asset('/Products/flymodule.jpg')}}" />
+                                <img src="{{ asset('/Products/flymodule.jpg') }}" />
                                 <div>
                                     <h1>SoLo 太陽軌道飛行器</h1>
                                     <p>點擊圖片可放大</p>
@@ -246,7 +267,7 @@
                                 </div>
                             </div>
                             <div class="swiper-slide">
-                                <img src="{{asset('/Products/lan01.jpg')}}" />
+                                <img src="{{ asset('/Products/lan01.jpg') }}" />
                                 <div>
                                     <h1>手提式-網路分析儀</h1>
                                     <p>點擊圖片可放大</p>
@@ -254,7 +275,8 @@
                                 </div>
                             </div>
                             <div class="swiper-slide">
-                                <video src="{{asset('/Products/firelighters.mp4')}}" poster="{{asset('/Products/firelighters.jpg')}}"></video>
+                                <video src="{{ asset('/Products/firelighters.mp4') }}"
+                                    poster="{{ asset('/Products/firelighters.jpg') }}"></video>
                                 <div>
                                     <h1>電弧脈衝打火機</h1>
                                     <p>點擊圖片可放大、播放 ►</p>
@@ -277,16 +299,44 @@
                         </div>
                     </div> -->
 
-                    <video src="{{asset('/NewVideos/BgVideo3.mp4')}}" muted loop></video>
+                    <video src="{{ asset('/NewVideos/BgVideo3.mp4') }}" muted loop></video>
                 </div>
 
 
             </div>
             <div class="MainText03">
-                <div>The Wall of&emsp;<img src="{{asset('/OtherImage/sheep.gif')}}" alt=""></div>
+                <div>The Wall of&emsp;<img src="{{ asset('/OtherImage/sheep.gif') }}" alt="">
+
+                    {{-- 這裡放置laravel的DB資料傳入練習 --}}
+
+                    {{-- 方法一:使用Blade Template樣板插孔語法 --}}
+
+                     {{-- 1.只印出文章A --}}
+
+                     {{-- {{$data[0]->title}}; --}}
+
+                     {{-- 2.印出所有的回傳資料 --}}
+                     @foreach ($data as $item)
+
+                     {{$item->title}}
+
+                     @endforeach
+
+                     {{-- 方法二:使用php印出資料 --}}
+                    <?php
+                    // echo "<p>".gettype($data)."</p>";
+                    // echo "<p>".$data."</p>";
+
+                    //  for($i=0; $i<count($data); $i++){
+                    //     echo "<p>${data}[${i}]</p>";
+                    //  }
+                    // echo "<p>${text}</p>";
+                    ?>
+                </div>
             </div>
             <div class="content4">
-                <div id="content4"><video src="{{asset('/NewVideos/Bar_10801 mp4.mp4')}}" loop muted></video></div>
+                <div id="content4"><video src="{{ asset('/NewVideos/Bar_10801 mp4.mp4') }}" loop muted></video>
+                </div>
             </div>
             <!-- <div class="MainText03"><div></div><img src="./otherImage/Truss_Light.png" alt=""></div> -->
         </div>
@@ -298,7 +348,7 @@
             </p>
         </div>
     </footer>
-    <a href="#Top"><img id="CyberDog" src="{{asset('/看板犬/Rad_Shiba.png')}}" alt=""></a>
+    <a href="#Top"><img id="CyberDog" src="{{ asset('/看板犬/Rad_Shiba.png') }}" alt=""></a>
 
 
 </body>
@@ -327,7 +377,7 @@
     });
 </script>
 
-<script type="text/javascript" src="{{asset('/js/CyberScript.js')}}"></script>
+<script type="text/javascript" src="{{ asset('/js/CyberScript.js') }}"></script>
 
 
 

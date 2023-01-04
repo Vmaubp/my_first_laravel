@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller
 {
@@ -11,7 +12,39 @@ class NewsController extends Controller
     //新增一個自己網頁版的分工函式index(函式名子會給web.php寫分工功能時用來對照)
     public function index()
     {
-        return view('cyberworld');
+        //測試抓資料
+        // $data = DB::table('news')->get();
+        // dd這是測試用印出函式
+        // dd($data);
+
+        //抓舊3筆
+        $bedata = DB::table('news')->take(3)->get();
+
+        //抓最新3筆，利用排序功能將id倒過來抓
+        $afdata = DB::table('news')->orderBy('id', 'desc')->take(3)->get();
+
+        //隨機抓3筆
+        $randata = DB::table('news')->inRandomOrder()->take(3)->get();
+        // dd($bedata, $afdata, $randata);
+
+
+        // $data = $bedata->concat($afdata)->concat($randata);
+
+        //抓取各news的title
+        $data = DB::table('news')->get('title');
+        // dd($data);
+        $text = DB::table('news')->inRandomOrder()->take(3)->get('content');
+
+        //指定第幾筆，例如第3筆
+        // $pdata = DB::table('news')->find(3);
+        // dd($pdata);
+        // dd(gettype($data));
+
+        //抓取TopVideo的影片
+        $topvideo = DB::table('videos')->where('title', 'topvideo')->get('url');
+        // dd($topvideo);
+
+        return view('cyberworld', ['data' => $data, 'text' => $text, 'topvideo' => $topvideo]);
     }
 }
 
