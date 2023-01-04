@@ -188,6 +188,7 @@
                             <video data-type="vid" src="{{ asset('/NewVideos/GHOST IN THE SHELL.mp4') }}"
                                 class="C2sImg CV5" poster="{{ asset('/NewVideos/poster/ghostposter.png') }}"></video> --}}
 
+                                {{-- 使用blade template套入DB內的影片連結 --}}
                                 @for ($i=0;$i<5;$i++)
 
                                 <video data-type="vid" src="{{ $c2svido[$i]->src }}" class="C2sImg CV1"
