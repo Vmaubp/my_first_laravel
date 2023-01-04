@@ -51,8 +51,10 @@ Route::get('/cyberworld', [NewsController::class, 'index']);
 //(可讀取)另一個指定讀取自訂Controller(NewsController)的方法
 // Route::get('/cyberworld', 'App\Http\Controllers\NewsController@index');
 
-//連結到留言板頁面
+//新增連結到留言板頁面的路由
 Route::get('/comment', [NewsController::class, 'comment']);
+//新增按下submit鈕送出form功能(跳轉去執行save_comment)
+Route::get('/comment/save', [NewsController::class, 'save_comment']);
 
 
 /////////////////////////////////////////////

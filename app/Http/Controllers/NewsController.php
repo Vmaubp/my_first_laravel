@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+//Request這是傳遞資料(如input表單)接收參數的特殊語法
 use Illuminate\Http\Request;
+
+//DB是用來去資料庫撈資料的特殊語法
 use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller
@@ -38,7 +41,6 @@ class NewsController extends Controller
         //指定第幾筆，例如第3筆
         // $pdata = DB::table('news')->find(3);
         // dd($pdata);
-        // dd(gettype($data));
 
         //抓取TopVideo的影片
         $topvideo = DB::table('topvideos')->where('title', 'cyber')->get();
@@ -51,9 +53,22 @@ class NewsController extends Controller
         return view('cyberworld', ['data' => $data, 'text' => $text, 'topvideo' => $topvideo, 'c2svido' => $c2svido]);
     }
 
+
+
     //路由跳轉到留言板頁面(注意/下一層這裡改為使用.代替)
     public function comment(){
         return view('comment.comment');
+    }
+
+
+    //當按下Submit時執行這個跳轉函式(使用傳值方式接收input來的資料)
+    public function save_comment(Request $request){
+        //這裡參數有特殊寫法格式，先Request搭配一個$變數(常直接用request)
+
+        // dd($request->content);
+        dd($request->all());
+        //all()函式可以顯示所有input的資料(而不顯示用來給瀏覽器看的head)
+
     }
 }
 

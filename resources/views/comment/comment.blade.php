@@ -33,7 +33,6 @@
 
         .comment .container {
             width: 50%;
-            /* height: 30vh; */
 
             border: 2px solid black;
             border-radius: 15px;
@@ -41,11 +40,6 @@
             background-color: white;
             display: flex;
             flex-direction: column;
-            /* justify-content: center; */
-            /* align-items: flex-start; */
-
-            /* position: relative;
-            top: 5vh; */
 
         }
 
@@ -111,6 +105,14 @@
             margin-top: 3%;
         }
 
+        .form section{
+            margin-top: 3%;
+        }
+
+        .content{
+            height: 20vh;
+        }
+
         input {
             width: 100%;
             height: 2.5rem;
@@ -130,6 +132,7 @@
         .reset {
             width: 10%;
         }
+
     </style>
 </head>
 
@@ -172,19 +175,22 @@
 
                 <hr>
 
-
-                <form class="form" action="" methon="">
-
-                    <h1>姓名</h1>
-                    <input type="text" value="">
-                    <h1>標題</h1>
-                    <input type="text" value="">
-                    <h1>內容</h1>
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
-                    <div class="submit_btn">
-                        <input class="submit" type="submit" value="送出">
-                        <input class="reset" type="reset" value="重置">
-                    </div>
+                {{-- 填寫表單 --}}
+                <form class="form" action="/comment/save" methon="GET">
+                    {{-- action和methon需跟route對應 --}}
+                    <h1>我有話想說...</h1>
+                    <section>
+                        <h1>姓名</h1>
+                        <input type="text" value="" name="name">
+                        <h1>標題</h1>
+                        <input type="text" value="" name="title">
+                        <h1>內容</h1>
+                        <input class="content" type="text" value="" name="content" placeholder="請勿輸入不雅文字...">
+                        <div class="submit_btn">
+                            <input class="submit" type="submit" value="送出">
+                            <input class="reset" type="reset" value="清除">
+                        </div>
+                    </section>
                 </form>
             </div>
         </div>
