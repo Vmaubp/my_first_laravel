@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Str;
 
+//這個是修改Migration的timestamp需要的
+use Illuminate\Database\DBAL\TimestampType;
+
 return [
 
     /*
@@ -125,7 +128,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
         ],
 
         'default' => [
@@ -146,6 +149,13 @@ return [
             'database' => env('REDIS_CACHE_DB', '1'),
         ],
 
+    ],
+
+    //這個是修改Migration的timestamp需要的
+    'dbal' => [
+        'types' => [
+            'timestamp' => TimestampType::class,
+        ],
     ],
 
 ];

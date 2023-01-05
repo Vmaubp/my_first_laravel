@@ -96,10 +96,10 @@
             align-items: flex-end;
         }
 
-        .comment .container .textarea {
+        /* .comment .container .textarea {
             width: 100%;
             height: 20vh;
-        }
+        } */
 
         .form {
             margin-top: 3%;
@@ -171,7 +171,7 @@
                     </div>
                     <div class="date">發文時間</div>
                 </div>
-                <div class="textarea">內文內文內文內文內文內文內文內文內文內文內文內文內文</div>
+                <div class="textarea">內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文</div>
 
                 <hr>
 
