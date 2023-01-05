@@ -51,10 +51,21 @@ Route::get('/cyberworld', [NewsController::class, 'index']);
 //(可讀取)另一個指定讀取自訂Controller(NewsController)的方法
 // Route::get('/cyberworld', 'App\Http\Controllers\NewsController@index');
 
+
 //新增連結到留言板頁面的路由
 Route::get('/comment', [NewsController::class, 'comment']);
+
 //新增按下submit鈕送出form功能(跳轉去執行save_comment)
 Route::get('/comment/save', [NewsController::class, 'save_comment']);
+
+//新增留言刪除功能，來自view的{{$comment->id}}這裡寫成{target}，將id透過Route傳給Controller辨識
+Route::get('/comment/delete/{id}', [NewsController::class, 'delete_comment']);
+
+//新增留言編輯功能，來自view的{{$comment->id}}這裡寫成{target}，將id透過Route傳給Controller辨識
+Route::get('/comment/edit/{id}', [NewsController::class, 'edit_comment']);
+//編輯頁面的完成編輯更新留言功能
+Route::get('/comment/update/{id}', [NewsController::class, 'update_comment']);
+
 
 
 /////////////////////////////////////////////

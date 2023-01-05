@@ -107,11 +107,11 @@
             margin-bottom: 1%;
         }
 
-        .comment .container a{
+        .comment .container a {
             text-decoration: none;
         }
 
-        .comment .container hr{
+        .comment .container hr {
             margin-top: 1%;
         }
 
@@ -154,77 +154,23 @@
     <main>
         <div class="comment">
             <div class="container">
-                <h1>留言板</h1>
 
-                {{-- 純{{ $comments }}會將compact組合過的所有資料庫資料合成的陣列印出來 --}}
-
-                @foreach ($comments as $comment)
-                    <div class="info_container">
-                        <div class="info">
-                            <div class="title">{{ $comment->title }}</div>
-                            <div class="author">{{ $comment->name }}</div>
-                        </div>
-                        <div class="date">{{ $comment->created_at }}</div>
-                    </div>
-                    <div class="textarea">{{ $comment->content }}</div>
-                    <div>
-                        <a href="/comment/delete/{{$comment->id}}">刪除</a>
-                        <a href="/comment/edit/{{$comment->id}}">編輯</a>
-                    </div>
-
-                    <hr>
-                @endforeach
-
-                {{-- 指定筆數 --}}
-                {{-- @for ($i = 0; $i < 3; $i++)
-                    <div class="info_container">
-                        <div class="info">
-                            <div class="title">{{ $comments[$i]->title }}</div>
-                            <div class="author">{{ $comments[$i]->name }}</div>
-                        </div>
-                        <div class="date">發文時間</div>
-                    </div>
-                    <div class="textarea">{{ $comments[$i]->content }}</div>
-
-                    <hr>
-                @endfor --}}
-
-
-                {{-- <div class="info_container">
-                    <div class="info">
-                        <div class="title">測試標題</div>
-                        <div class="author">作者名</div>
-                    </div>
-                    <div class="date">發文時間</div>
-                </div>
-                <div class="textarea">內文內文內文內文內文內文內文內文內文內文內文內文內文</div>
-
-                <hr>
-
-                <div class="info_container">
-                    <div class="info">
-                        <div class="title">測試標題</div>
-                        <div class="author">作者名</div>
-                    </div>
-                    <div class="date">發文時間</div>
-                </div>
-                <div class="textarea">
-                    內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文
-                </div>
-
-                <hr> --}}
-
-                {{-- 填寫表單 --}}
-                <form class="form" action="/comment/save" methon="GET">
+                {{-- 編輯表單 --}}
+                <form class="form" action="/comment/update/{{$edit_comment->id}}" methon="GET">
                     {{-- action和methon需跟route對應 --}}
-                    <h1>我有話想說...</h1>
+                    <h1>留言編輯</h1>
                     <section>
                         <h1>姓名</h1>
-                        <input type="text" value="" name="name">
+
+                        {{-- 因為使用first()方法抓資料所以不需要 --}}
+                        {{-- @foreach ($edit_comments as $edit_comment) --}}
+                        <input type="text" value="{{ $edit_comment->name }}" name="name">
                         <h1>標題</h1>
-                        <input type="text" value="" name="title">
+                        <input type="text" value="{{ $edit_comment->title }}" name="title">
                         <h1>內容</h1>
-                        <input class="content" type="text" value="" name="content" placeholder="請勿輸入不雅文字...">
+                        <input class="content" type="text" value="{{ $edit_comment->content }}" name="content"
+                            placeholder="請勿輸入不雅文字...">
+
                         <div class="submit_btn">
                             <input class="submit" type="submit" value="送出">
                             <input class="reset" type="reset" value="清除">
