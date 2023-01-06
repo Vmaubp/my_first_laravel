@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\NewsController;
 
+//CyberWorld的Controller
+use App\Http\Controllers\TopVideosController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,16 +54,45 @@ Route::get('/cyberworld', [NewsController::class, 'index']);
 //(可讀取)另一個指定讀取自訂Controller(NewsController)的方法
 // Route::get('/cyberworld', 'App\Http\Controllers\NewsController@index');
 
-//TopVideos管理功能相關頁面(通常一套完整的CRUD有6項功能) <=手建版
-Route::get('/topvideos', [TopVideosController::class, 'index']);//總表,列表頁
-Route::get('/topvideos/create', [TopVideosController::class, 'create']);//新增頁
-Route::get('/topvideos/store', [TopVideosController::class, 'store']);//儲存功能
-Route::get('/topvideos/edit/{id}', [TopVideosController::class, 'edit']);//編輯頁
-Route::get('/topvideos/update/{id}', [TopVideosController::class, 'update']);//更新
-Route::get('/topvideos/delete/{id}', [TopVideosController::class, 'delete']);//刪除
 
 
+//TopVideos管理功能相關頁面(通常一套完整的CRUD有6項功能)
+
+#手工建立版1
+// Route::get('/topvideos', [TopVideosController::class, 'index']);//總表,列表頁
+// Route::get('/topvideos/create', [TopVideosController::class, 'create']);//新增頁
+// Route::get('/topvideos/store', [TopVideosController::class, 'store']);//儲存功能
+// Route::get('/topvideos/edit/{id}', [TopVideosController::class, 'edit']);//編輯頁
+// Route::get('/topvideos/update/{id}', [TopVideosController::class, 'update']);//更新
+// Route::get('/topvideos/delete/{id}', [TopVideosController::class, 'delete']);//刪除
+
+//手工建立版2(遵照RESTful API的規定版，由改變Route:功能來取代不同路徑)
+// Route::get('/topvideos', [TopVideosController::class, 'index']);//總表,列表頁
+// Route::get('/topvideos/create', [TopVideosController::class, 'create']);//新增頁
+// Route::post('/topvideos', [TopVideosController::class, 'store']);//儲存功能
+// Route::get('/topvideos/{id}', [TopVideosController::class, 'edit']);//單筆檢視頁(對應--resource自動產生出來的Controller的show函式)
+// Route::post('/topvideos/{id}', [TopVideosController::class, 'edit']);//編輯頁
+// Route::patch('/topvideos/{id}', [TopVideosController::class, 'update']);//更新
+// Route::delete('/topvideos/{id}', [TopVideosController::class, 'destroy']);//刪除
+
+//自動建立版 以下一行抵上面7行
+//(同樣會創建CRUD的功能並自動對應RESTful API規格)
+//但注意form的action因為是很老的標籤只能提供get跟post所以會對應不到
 // Route::resource('topvideos', TopVideosController::class);
+
+
+//老師的混合版本(部分參考RESTful API，並仍能直接操作自動生成的Controller)
+Route::prefix('/topvideos')->group(function(){
+    Route::get('/', [TopVideosController::class, 'index']);//總表,列表頁
+    Route::get('/create', [TopVideosController::class, 'create']);//新增頁
+    Route::post('/store', [TopVideosController::class, 'store']);//儲存功能
+    Route::get('/edit/{id}', [TopVideosController::class, 'edit']);//編輯頁(老師傾向於編輯頁獨立一頁路徑畫面。每個人設計習慣不同)
+    Route::post('/update/{id}', [TopVideosController::class, 'update']);//更新
+    Route::post('/delete/{id}', [TopVideosController::class, 'destroy']);//刪除
+});
+
+
+
 
 //新增連結到留言板頁面的路由
 Route::get('/comment', [NewsController::class, 'comment']);
