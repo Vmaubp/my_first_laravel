@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 //DB是用來去資料庫撈資料的特殊語法
 use Illuminate\Support\Facades\DB;
 
+//Comment(自訂)是用Model取代DB去資料庫撈資料的特殊語法，更安全
+use App\Models\Comment;
+use App\Models\CyberWorldTopVideo;
+use App\Models\CyberWorldVideo;
+use App\Models\CyberWorldImg;
+
 class NewsController extends Controller
 {
 
@@ -43,11 +49,14 @@ class NewsController extends Controller
         ///// CyberWorld部分 /////
 
         //抓取TopVideo的影片
-        $topvideo = DB::table('topvideos')->where('title', 'cyber')->get();
-        // dd($topvideo);
+        // $topvideo = DB::table('topvideos')->where('title', 'cyber')->get();
+
+        //使用Model去抓資料
+        $topvideo = CyberWorldTopVideo::where('title', 'cyber')->get();
 
         //抓取第2區的影片
-        $c2svido = DB::table('videos')->get();
+        // $c2svido = DB::table('videos')->get();
+        $c2svido = CyberWorldVideo::get();
 
         //回傳給veiw撈取到的特定資料庫資料
         return view('cyberworld', ['data' => $data, 'text' => $text, 'topvideo' => $topvideo, 'c2svido' => $c2svido]);
@@ -59,8 +68,11 @@ class NewsController extends Controller
     public function comment()
     {
 
-        //撈出全部
-        $comments = DB::table('comments')->orderby('id', 'desc')->get();
+        //用DB方式去資料庫撈出全部
+        // $comments = DB::table('comments')->orderby('id', 'desc')->get();
+
+        //用Model方式去資料庫撈出全部
+        $comments = Comment::orderby('id', 'desc')->get();
 
         //從資料庫讀出留言板資料(撈出最新3筆)
         // $comments = DB::table('comments')->orderby('id', 'desc')->take(3)->get();
@@ -80,9 +92,17 @@ class NewsController extends Controller
         // dd($request->all());
         //all()函式可以顯示所有input的資料(而不顯示用來給瀏覽器看的head)
 
-        // 將資料寫入資料表裡
-        DB::table('comments')->insert([
+        // 用DB方法將資料寫入資料表裡
+        // DB::table('comments')->insert([
 
+        //     'title' => $request->title,
+        //     'name' => $request->name,
+        //     'content' => $request->content,
+        //     'email' => ''
+        // ]);
+
+        // 用Model方法將資料寫入資料表裡
+        Comment::create([
             'title' => $request->title,
             'name' => $request->name,
             'content' => $request->content,
@@ -103,7 +123,7 @@ class NewsController extends Controller
     public function delete_comment($id)
     {
         // dd($id);
-        DB::table('comments')->where('id', $id)->delete();
+        Comment::where('id', $id)->delete();
 
         return redirect('/comment');
     }
@@ -113,7 +133,7 @@ class NewsController extends Controller
     {
 
         //重新抓取相應ID的資料並印到edit.blade.php頁面
-        $edit_comment = DB::table('comments')->where('id', $id)->first();
+        $edit_comment = Comment::where('id', $id)->first();
         //因為只會調出一筆來編輯，使用first()而不用get();這樣在view頁面就不需要[0]或@foreach!
 
         // dd($edit_comments);
@@ -129,7 +149,7 @@ class NewsController extends Controller
 
         //方法1 DB操作 更新資料
         // 將編輯完資料覆蓋入資料表相應的ID欄裡-->where('id', $id)->update()，注意這裡DB操作文件規定是用where()不能用find()會報錯
-        DB::table('comments')->where('id', $id)->update([
+        Comment::where('id', $id)->update([
 
             'title' => $request->title,
             'name' => $request->name,

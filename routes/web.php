@@ -51,6 +51,16 @@ Route::get('/cyberworld', [NewsController::class, 'index']);
 //(可讀取)另一個指定讀取自訂Controller(NewsController)的方法
 // Route::get('/cyberworld', 'App\Http\Controllers\NewsController@index');
 
+//TopVideos管理功能相關頁面(通常一套完整的CRUD有6項功能) <=手建版
+Route::get('/topvideos', [TopVideosController::class, 'index']);//總表,列表頁
+Route::get('/topvideos/create', [TopVideosController::class, 'create']);//新增頁
+Route::get('/topvideos/store', [TopVideosController::class, 'store']);//儲存功能
+Route::get('/topvideos/edit/{id}', [TopVideosController::class, 'edit']);//編輯頁
+Route::get('/topvideos/update/{id}', [TopVideosController::class, 'update']);//更新
+Route::get('/topvideos/delete/{id}', [TopVideosController::class, 'delete']);//刪除
+
+
+// Route::resource('topvideos', TopVideosController::class);
 
 //新增連結到留言板頁面的路由
 Route::get('/comment', [NewsController::class, 'comment']);
@@ -80,4 +90,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
