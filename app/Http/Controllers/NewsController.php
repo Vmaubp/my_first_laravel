@@ -148,7 +148,7 @@ class NewsController extends Controller
 
 
         //方法1 DB操作 更新資料
-        // 將編輯完資料覆蓋入資料表相應的ID欄裡-->where('id', $id)->update()，注意這裡DB操作文件規定是用where()不能用find()會報錯
+        // 將編輯完資料覆蓋入資料表相應的ID欄裡-->where('id', $id)->update()，注意這裡操作文件規定是用where()不能用find()會報錯
         Comment::where('id', $id)->update([
 
             'title' => $request->title,

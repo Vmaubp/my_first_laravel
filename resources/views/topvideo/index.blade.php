@@ -11,6 +11,9 @@
     {{-- 載入datatable(需要依賴在Jquery版本) --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
     <style>
+        *{
+            box-sizing: border-box;
+        }
         .comment {
             width: 100%;
             /* height: auto; */
@@ -39,12 +42,13 @@
 
         }
 
-        .form-title{
+        .form-title {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .form-title a{
+
+        .form-title a {
             font-size: 1.5rem;
             color: white;
             border: 2px solid black;
@@ -54,7 +58,7 @@
             padding: 1%;
         }
 
-        .form-title a:hover{
+        .form-title a:hover {
             background-color: rgb(3, 156, 3);
         }
 
@@ -64,12 +68,18 @@
             position: relative;
         }
 
+        thead>tr th {
+            /* font-size: 1rem; */
+            /* width: auto; */
+            white-space: nowrap;
+        }
+
         tbody>tr>td {
-            width: 15%;
+            width: 13%;
         }
 
         .posrtr_videos {
-            width: 25%;
+            width: 35%;
         }
 
         video {
@@ -77,17 +87,33 @@
             height: auto;
         }
 
-        .btn-edit {
-            background-color: rgb(1, 105, 1);
+        td:nth-child(6) a{
+            width: 100%;
+            font-size: 1rem;
+            color: white;
+            border: 2px solid black;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            padding: 5%;
+            margin: 5% 0;
         }
+
+        td .btn-edit {
+            background-color: rgb(0, 167, 0);
+        }
+
         .btn-edit:hover {
             background-color: green;
             cursor: pointer;
         }
 
-        .btn-delete {
+        td .btn-delete {
             background-color: rgb(216, 5, 5);
         }
+
         .btn-delete:hover {
             background-color: red;
             cursor: pointer;
@@ -136,7 +162,7 @@
     <main>
         <div class="comment">
             <div class="container">
-                <form class="form" action="" methon="GET">
+                <form class="form" action="" method="GET">
                     {{-- action和methon需跟route對應 --}}
                     <div class="form-title">
                         <h1>TopVideos 影片管理</h1>
@@ -147,11 +173,11 @@
                         <table id="topvideos_table" class="display">
                             <thead>
                                 <tr>
-                                    <th>影片預覽</th>
-                                    <th>影片名稱</th>
-                                    <th>影片類型</th>
-                                    <th>影片時間</th>
-                                    <th>影片權重</th>
+                                    <th>預覽</th>
+                                    <th>名稱</th>
+                                    <th>類型</th>
+                                    <th>時間</th>
+                                    <th>權重</th>
                                     <th>功能</th>
                                 </tr>
                             </thead>
@@ -168,8 +194,8 @@
                                         <td>{{ $topvideo->duration }}秒</td>
                                         <td>{{ $topvideo->weight }}</td>
                                         <td>
-                                            <button class="btn-edit">編輯</button>
-                                            <button class="btn-delete">刪除</button>
+                                            <a href="/topvideos/edit/{{ $topvideo->id }}" class="btn-edit">編輯</a>
+                                            <a href="/topvideos/delete/{{ $topvideo->id }}" class="btn-delete">刪除</a>
                                         </td>
                                     </tr>
                                 @endforeach

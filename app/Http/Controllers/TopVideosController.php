@@ -47,7 +47,7 @@ class TopVideosController extends Controller
         //檢查檔案是否有新增，此時若出現419 | PAGE EXPIRED表示觸發了跨站請求偽造CSRF的安全機制
         dd($request->all());
 
-        return redirect('/topvideo');
+        return redirect('/topvideos');
     }
 
     /**
@@ -69,8 +69,9 @@ class TopVideosController extends Controller
      */
     public function edit($id)
     {
-        //
-        return view('topvideo.edit');
+        // dd($id);
+        $edit_topvideo = Topvideo::find($id);
+        return view('topvideo.edit', compact('edit_topvideo'));
     }
 
     /**
@@ -82,8 +83,17 @@ class TopVideosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        return redirect('/topvideo');
+        // 注意這裡操作文件規定是用where()不能用find()會報錯
+        Topvideo::where('id', $id)->update([
+
+            'title' => $request->title,
+            'type' => $request->type,
+            'duration' => $request->duration,
+            'weight' => $request->weight
+
+        ]);
+
+        return redirect('/topvideos');
     }
 
     /**
@@ -95,6 +105,6 @@ class TopVideosController extends Controller
     public function destroy($id)
     {
         //
-        return redirect('/topvideo');
+        return redirect('/topvideos');
     }
 }

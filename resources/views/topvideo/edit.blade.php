@@ -18,7 +18,7 @@
             background-color: powderblue;
         }
 
-        .comment {
+        .topvideo {
             width: 100%;
             /* height: auto; */
             background-color: lightsteelblue;
@@ -32,7 +32,7 @@
             padding-bottom: 2%;
         }
 
-        .comment .container {
+        .topvideo .container {
             width: 50%;
 
             border: 2px solid black;
@@ -46,12 +46,12 @@
 
         }
 
-        .comment .container>h1 {
+        .topvideo .container>h1 {
             font-size: 2.5rem;
             font-weight: bolder;
         }
 
-        .comment .container .info_container {
+        .topvideo .container .info_container {
             width: 100%;
             height: 15%;
             background-color: lightgoldenrodyellow;
@@ -63,13 +63,13 @@
             margin-top: 2%;
         }
 
-        .comment .container .info_container .info {
+        .topvideo .container .info_container .info {
             width: 50%;
             display: flex;
             flex-direction: row;
         }
 
-        .comment .container .info_container .info .title {
+        .topvideo .container .info_container .info .title {
             width: 70%;
             font-weight: bolder;
             color: black;
@@ -79,7 +79,7 @@
             font-size: 2rem;
         }
 
-        .comment .container .info_container .info .author {
+        .topvideo .container .info_container .info .author {
             width: 30%;
             font-weight: bolder;
             color: black;
@@ -89,7 +89,7 @@
             font-size: 1.25rem;
         }
 
-        .comment .container .info_container .date {
+        .topvideo .container .info_container .date {
             width: 50%;
             color: black;
             font-size: 1.25rem;
@@ -99,7 +99,7 @@
             align-items: flex-end;
         }
 
-        .comment .container .textarea {
+        .topvideo .container .textarea {
             font-size: 1.5rem;
             /* font-weight: bold; */
             /* border: 1px solid black;
@@ -108,11 +108,11 @@
             margin-bottom: 1%;
         }
 
-        .comment .container a {
+        .topvideo .container a {
             text-decoration: none;
         }
 
-        .comment .container hr {
+        .topvideo .container hr {
             margin-top: 1%;
         }
 
@@ -124,28 +124,55 @@
             margin-top: 3%;
         }
 
-        .content {
-            height: 20vh;
+        .form section div {
+            font-size: 1.5rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 1%;
+            margin: 1% 0;
         }
+
+        .form section .type_video {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
 
         input {
             width: 100%;
             height: 2.5rem;
+        }
 
+        h1 {
+            margin: 2% 0;
         }
 
         .submit_btn {
             width: 100%;
             display: flex;
             justify-content: center;
+            margin: 2%;
         }
 
         .submit {
-            width: 10%;
+            width: auto;
+            color: white;
+            background-color: green;
+            margin: 1%;
+            padding: 1%;
+            cursor: pointer;
         }
 
         .reset {
-            width: 10%;
+            width: auto;
+            color: white;
+            background-color: red;
+            margin: 1%;
+            padding: 1%;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -153,24 +180,43 @@
 <body>
     <header></header>
     <main>
-        <div class="comment">
+        <div class="topvideo">
             <div class="container">
 
-                {{-- 編輯個別TopVideo --}}
-                <form class="form" action="/topvideos/edit/{{$edit_comment->id}}" methon="GET">
+                {{-- 編輯個別TopVideo，將新資料提交到update --}}
+                <form class="form" action="/topvideos/update/{{ $edit_topvideo->id }}" method="post">
                     {{-- action和methon需跟route對應 --}}
-                    <h1>單獨影片編輯</h1>
+                    <h1>{{ $edit_topvideo->title }}影片編輯</h1>
                     <section>
-                        <h1>姓名</h1>
 
-                        {{-- 因為使用first()方法抓資料所以不需要 --}}
-                        {{-- @foreach ($edit_comments as $edit_comment) --}}
-                        <input type="text" value="{{ $edit_comment->name }}" name="name">
-                        <h1>標題</h1>
-                        <input type="text" value="{{ $edit_comment->title }}" name="title">
-                        <h1>內容</h1>
-                        <input class="content" type="text" value="{{ $edit_comment->content }}" name="content"
-                            placeholder="請勿輸入不雅文字...">
+                        @csrf
+
+                        {{-- 因為使用first()方法抓資料所以不需要指定索引值 --}}
+                        <h1>影片名稱</h1>
+                        <input type="text" value="{{ $edit_topvideo->title }}" name="title">
+
+                        <h1>影片類型</h1>
+                        <div class="type_video">
+                            <input type="radio" name="type" id="type_video_1" value="cyber"><label
+                                for="type_video_1">Cyber</label>
+                            <input type="radio" name="type" id="type_video_2" value="pixel"><label
+                                for="type_video_2">Pixel</label>
+                            <input type="radio" name="type" id="type_video_3" value="retro"><label
+                                for="type_video_3">Retro</label>
+                            <input type="radio" name="type" id="type_video_4" value="synthwave"><label
+                                for="type_video_4">Synthwave</label>
+                            <input type="radio" name="type" id="type_video_5" value="vaporwave"><label
+                                for="type_video_5">Vaporwave</label>
+                        </div>
+
+                        <h1>影片時間</h1>
+                        <input type="text" value="{{ $edit_topvideo->duration }}" name="duration">
+
+                        <h1>影片權重</h1>
+                        <input type="text" value="{{ $edit_topvideo->weight }}" name="weight">
+                        {{--
+                        <h1>其他</h1>
+                        <input type="text" value="{{ $edit_topvideo->type }}" name="title"> --}}
 
                         <div class="submit_btn">
                             <input class="submit" type="submit" value="送出">
