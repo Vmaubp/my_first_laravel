@@ -124,6 +124,10 @@
             margin-top: 3%;
         }
 
+        .form section video {
+            width: 100%;
+        }
+
         .form section div {
             font-size: 1.5rem;
             display: flex;
@@ -184,12 +188,21 @@
             <div class="container">
 
                 {{-- 編輯個別TopVideo，將新資料提交到update --}}
-                <form class="form" action="/topvideos/update/{{ $edit_topvideo->id }}" method="post">
+                <form class="form" action="/topvideos/update/{{ $edit_topvideo->id }}" method="post"
+                    enctype="multipart/form-data">
                     {{-- action和methon需跟route對應 --}}
                     <h1>{{ $edit_topvideo->title }}影片編輯</h1>
                     <section>
 
                         @csrf
+
+                        <h1>現在影片:</h1>
+                        <video src="{{ $edit_topvideo->src }}"></video>
+
+                        <div>
+                            <label for="top_video">影片修改:&emsp;</label>
+                            <input type="file" name="top_video" id="top_video">
+                        </div>
 
                         {{-- 因為使用first()方法抓資料所以不需要指定索引值 --}}
                         <h1>影片名稱</h1>
@@ -214,6 +227,7 @@
 
                         <h1>影片權重</h1>
                         <input type="text" value="{{ $edit_topvideo->weight }}" name="weight">
+
                         {{--
                         <h1>其他</h1>
                         <input type="text" value="{{ $edit_topvideo->type }}" name="title"> --}}

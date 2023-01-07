@@ -65,7 +65,7 @@ class TopVideosController extends Controller
         Topvideo::create([
             'title' => $request->title,
             'content' => $request->content,
-            'src' => $path,
+            'src' => "/" . $path,
             'weight' => $request->weight,
             'duration' => $request->duration,
             'type' => $request->type
@@ -110,15 +110,45 @@ class TopVideosController extends Controller
 
         // dd($request->all());
 
+        //若有修改影片才進行新影片儲存與刪除舊影片
+        if ($request->top_video != null) {
+
+            //刪除資料夾內的舊檔案(先抓出舊檔案的id並取出路徑)
+            $top_video_old = Topvideo::find($id);
+
+            //因為從資料庫讀取來的路徑是"上傳檔案後透過捷徑連結的版本"，所以這裡如果直接填入讀取路徑會抓不到檔案，需要反過來用str_replace()再把它換回最原始的路徑樣貌
+            $delete_target = str_replace('/storage', 'public', $top_video_old->src);
+
+            // dd($delete_target, $top_video_old->src);
+
+            Storage::disk('local')->delete($delete_target);
+
+            // dd($top_video_old->src);
+
+            //新影片儲存進資料夾內並修正路徑
+            $path = Storage::disk('local')->put('public/topvideos', $request->top_video);
+            $path = str_replace('public', 'storage', $path);
+        }
+
+
         // 注意這裡操作文件規定是用where()不能用find()會報錯
         Topvideo::where('id', $id)->update([
 
             'title' => $request->title,
-            'type' => $request->type,
+            'content' => $request->content,
+
+            'weight' => $request->weight,
             'duration' => $request->duration,
-            'weight' => $request->weight
+            'type' => $request->type
 
         ]);
+
+        //有修改影片才會改路徑
+        if ($request->top_video != null) {
+            Topvideo::where('id', $id)->update([
+                'src' => "/" . $path,
+            ]);
+        }
 
         return redirect('/topvideos');
     }
@@ -133,7 +163,12 @@ class TopVideosController extends Controller
     {
         // dd($id);
 
+        $top_video = Topvideo::find($id);
+
+        //刪除資料表內的該筆資料
         Topvideo::where('id', $id)->delete();
+        //刪除資料夾內的檔案
+        Storage::delete($top_video->src);
 
         return redirect('/topvideos');
     }
