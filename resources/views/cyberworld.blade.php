@@ -89,7 +89,7 @@
                 <div id="DivLeft">
                     <div id="sLeftList" onclick="OpenLeftList()"></div>
                     <div><a href="/">Future</a></div>
-                    <div><a href="#content5">TVSHOW</a></div>
+                    <div><a href="/topvideos">TVSHOW</a></div>
                 </div>
 
                 <div id="DivLogoCenter"><img id="LogoCenter" class="Logo"

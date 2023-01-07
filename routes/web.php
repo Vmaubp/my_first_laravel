@@ -83,6 +83,7 @@ Route::get('/cyberworld', [NewsController::class, 'index']);
 
 //老師的混合版本(部分參考RESTful API，並仍能直接操作自動生成的Controller)
 Route::prefix('/topvideos')->group(function(){
+    // 這裡是 /topvideos 的後台管理頁面
     Route::get('/', [TopVideosController::class, 'index']);//總表,列表頁
     Route::get('/create', [TopVideosController::class, 'create']);//新增頁
     Route::post('/store', [TopVideosController::class, 'store']);//儲存功能

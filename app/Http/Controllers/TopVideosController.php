@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+// 這裡是 /topvideos 的後台管理頁面
+
 class TopVideosController extends Controller
 {
     /**
