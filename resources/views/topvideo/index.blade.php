@@ -11,23 +11,86 @@
     {{-- 載入datatable(需要依賴在Jquery版本) --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
     <style>
+        .comment {
+            width: 100%;
+            /* height: auto; */
+            background-color: lightsteelblue;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            padding-top: 2%;
+            padding-bottom: 2%;
+        }
+
+        .comment .container {
+            width: 50%;
+
+            border: 2px solid black;
+            border-radius: 15px;
+
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+
+            padding: 1.5%;
+
+        }
+
+        .form-title{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .form-title a{
+            font-size: 1.5rem;
+            color: white;
+            border: 2px solid black;
+            border-radius: 15px;
+            text-decoration: none;
+            background-color: rgb(0, 128, 0);
+            padding: 1%;
+        }
+
+        .form-title a:hover{
+            background-color: rgb(3, 156, 3);
+        }
+
         .NavTop {
             opacity: 1;
             z-index: 10;
             position: relative;
         }
-        tbody>tr>td{
-            width: 25%;
+
+        tbody>tr>td {
+            width: 15%;
         }
-        video{
+
+        .posrtr_videos {
+            width: 40%;
+        }
+
+        video {
             width: 100%;
             height: auto;
         }
-        .btn-edit{
-            background-color: green;
+
+        .btn-edit {
+            background-color: rgb(1, 105, 1);
         }
-        .btn-delete{
+        .btn-edit:hover {
+            background-color: green;
+            cursor: pointer;
+        }
+
+        .btn-delete {
+            background-color: rgb(216, 5, 5);
+        }
+        .btn-delete:hover {
             background-color: red;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -75,28 +138,39 @@
             <div class="container">
                 <form class="form" action="" methon="GET">
                     {{-- action和methon需跟route對應 --}}
-                    <h1>TopVideos 影片管理</h1>
+                    <div class="form-title">
+                        <h1>TopVideos 影片管理</h1>
+                        <a href="/topvideos/create">新增TopVideos</a>
+                    </div>
                     <section>
                         {{-- //這裡是TopVideos的管理後台頁面 --}}
                         <table id="topvideos_table" class="display">
                             <thead>
                                 <tr>
                                     <th>影片預覽</th>
+                                    <th>影片類型</th>
                                     <th>影片時間</th>
                                     <th>影片權重</th>
                                     <th>功能</th>
                                 </tr>
                             </thead>
+
                             <tbody>
-                                <tr>
-                                    <td><video src="{{asset('/NewVideos/CyberPunkTopdown1.mp4')}}" poster=""></video></td>
-                                    <td>秒</td>
-                                    <td>1</td>
-                                    <td>
-                                        <button class="btn-edit">編輯</button>
-                                        <button class="btn-delete">刪除</button>
-                                    </td>
-                                </tr>
+                                {{-- 使用blade的template動態生成資料庫影片清單 --}}
+                                @foreach ($topvideos as $topvideo)
+                                    <tr>
+                                        <td class="posrtr_videos">
+                                            <video src="{{ $topvideo->src }}"></video>
+                                        </td>
+                                        <td>{{ $topvideo->title }}</td>
+                                        <td>{{ $topvideo->duration }}秒</td>
+                                        <td>{{ $topvideo->weight }}</td>
+                                        <td>
+                                            <button class="btn-edit">編輯</button>
+                                            <button class="btn-delete">刪除</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </section>

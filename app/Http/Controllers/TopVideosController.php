@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+//Comment(自訂)是用Model取代DB去資料庫撈資料的特殊語法，更安全
+use App\Models\Topvideo;
+
 // 這裡是 /topvideos 的後台管理頁面
 
 class TopVideosController extends Controller
@@ -15,8 +18,11 @@ class TopVideosController extends Controller
      */
     public function index()
     {
-        //
-        return view('topvideo.index');
+        //讓Model從資料庫撈東西在回傳到管理後台頁面
+        $topvideos = Topvideo::get();
+        // dd($topvideos);
+
+        return view('topvideo.index', ['topvideos'=> $topvideos]);
     }
 
     /**
@@ -27,6 +33,7 @@ class TopVideosController extends Controller
     public function create()
     {
         //
+        return view('topvideo.create');
     }
 
     /**
@@ -37,7 +44,10 @@ class TopVideosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //檢查檔案是否有新增，此時若出現419 | PAGE EXPIRED表示觸發了跨站請求偽造CSRF的安全機制
+        dd($request->all());
+
+        return redirect('/topvideo');
     }
 
     /**
@@ -48,7 +58,7 @@ class TopVideosController extends Controller
      */
     public function show($id)
     {
-        //
+        //用不到
     }
 
     /**
@@ -60,6 +70,7 @@ class TopVideosController extends Controller
     public function edit($id)
     {
         //
+        return view('topvideo.edit');
     }
 
     /**
@@ -72,6 +83,7 @@ class TopVideosController extends Controller
     public function update(Request $request, $id)
     {
         //
+        return redirect('/topvideo');
     }
 
     /**
@@ -83,5 +95,6 @@ class TopVideosController extends Controller
     public function destroy($id)
     {
         //
+        return redirect('/topvideo');
     }
 }
