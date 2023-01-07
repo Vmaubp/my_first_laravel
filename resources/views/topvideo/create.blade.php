@@ -151,20 +151,20 @@
                             <input type="file" name="top_video" id="top_video">
                         </div>
 
-                        <label for="name">影片名稱:</label>
-                        <input type="text" name="name" id="name">
+                        <label for="title">影片名稱:</label>
+                        <input type="text" name="title" id="title">
 
-                        <label for="type_video">類型設定:</label>
+                        <label>類型設定:</label>
                         <div>
-                            <input type="radio" name="type_video" id="type_video_1" value="cyber"><label
+                            <input type="radio" name="type" id="type_video_1" value="cyber"><label
                                 for="type_video_1">Cyber</label>
-                            <input type="radio" name="type_video" id="type_video_2" value="pixel"><label
+                            <input type="radio" name="type" id="type_video_2" value="pixel"><label
                                 for="type_video_2">Pixel</label>
-                            <input type="radio" name="type_video" id="type_video_3" value="retro"><label
+                            <input type="radio" name="type" id="type_video_3" value="retro"><label
                                 for="type_video_3">Retro</label>
-                            <input type="radio" name="type_video" id="type_video_4" value="synthwave"><label
+                            <input type="radio" name="type" id="type_video_4" value="synthwave"><label
                                 for="type_video_4">Synthwave</label>
-                            <input type="radio" name="type_video" id="type_video_5" value="vaporwave"><label
+                            <input type="radio" name="type" id="type_video_5" value="vaporwave"><label
                                 for="type_video_5">Vaporwave</label>
                         </div>
                         {{-- <select name="type_video" id="type_video">

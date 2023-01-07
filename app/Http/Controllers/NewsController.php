@@ -154,7 +154,7 @@ class NewsController extends Controller
             'title' => $request->title,
             'name' => $request->name,
             'content' => $request->content,
-            'email' => ''
+            'email' => '',
         ]);
 
         //方法2 物件操作 更新資料 此操作法9版laravel似乎被刪除了無法用

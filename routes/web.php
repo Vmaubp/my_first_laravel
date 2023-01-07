@@ -89,7 +89,7 @@ Route::prefix('/topvideos')->group(function(){
     Route::post('/store', [TopVideosController::class, 'store']);//儲存功能
     Route::get('/edit/{id}', [TopVideosController::class, 'edit']);//編輯頁(老師傾向於編輯頁獨立一頁路徑畫面。每個人設計習慣不同)
     Route::post('/update/{id}', [TopVideosController::class, 'update']);//更新
-    Route::post('/delete/{id}', [TopVideosController::class, 'destroy']);//刪除
+    Route::get('/delete/{id}', [TopVideosController::class, 'destroy']);//刪除
 });
 
 

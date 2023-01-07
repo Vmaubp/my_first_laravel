@@ -162,7 +162,7 @@
     <main>
         <div class="comment">
             <div class="container">
-                <form class="form" action="" method="GET">
+                <form class="form" action="" method="get">
                     {{-- action和methon需跟route對應 --}}
                     <div class="form-title">
                         <h1>TopVideos 影片管理</h1>
