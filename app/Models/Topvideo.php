@@ -26,5 +26,5 @@ class Topvideo extends Model
     // 因為資料庫設計其實預設就會是自動去對應複數s資料表名子跟主key默認是id
 
     // 除非你的資料表這裡設計得很不同不然不用加也能運行
-    protected $fillable = ['created_at', 'updated_at', 'title', 'content', 'src', 'weight', 'duration'];
+    protected $fillable = ['created_at', 'updated_at', 'title', 'content', 'src', 'weight', 'duration', 'type'];
 }
