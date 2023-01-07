@@ -52,7 +52,7 @@ class NewsController extends Controller
         // $topvideo = DB::table('topvideos')->where('title', 'cyber')->get();
 
         //使用Model去抓資料
-        $topvideo = CyberWorldTopVideo::where('title', 'cyber')->get();
+        $topvideo = CyberWorldTopVideo::where('type', 'cyber')->get();
 
         //抓取第2區的影片
         // $c2svido = DB::table('videos')->get();

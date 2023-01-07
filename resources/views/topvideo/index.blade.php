@@ -69,7 +69,7 @@
         }
 
         .posrtr_videos {
-            width: 40%;
+            width: 25%;
         }
 
         video {
@@ -148,6 +148,7 @@
                             <thead>
                                 <tr>
                                     <th>影片預覽</th>
+                                    <th>影片名稱</th>
                                     <th>影片類型</th>
                                     <th>影片時間</th>
                                     <th>影片權重</th>
@@ -163,6 +164,7 @@
                                             <video src="{{ $topvideo->src }}"></video>
                                         </td>
                                         <td>{{ $topvideo->title }}</td>
+                                        <td>{{ $topvideo->type }}</td>
                                         <td>{{ $topvideo->duration }}秒</td>
                                         <td>{{ $topvideo->weight }}</td>
                                         <td>

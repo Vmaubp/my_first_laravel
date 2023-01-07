@@ -151,6 +151,9 @@
                             <input type="file" name="top_video" id="top_video">
                         </div>
 
+                        <label for="name">名稱</label>
+                        <input type="text" name="name" id="name">
+
                         <div>
                             <label for="type_video">類型設定:</label>
                             <input type="radio" name="type_video" id="type_video_1" value="cyber"><label
