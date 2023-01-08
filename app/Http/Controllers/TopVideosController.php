@@ -10,6 +10,10 @@ use App\Models\Topvideo;
 //這是laravel的本地儲存位置File Storage
 use Illuminate\Support\Facades\Storage;
 
+//導入寄信程式(提醒上傳影片成功)
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewVideosComplete;
+
 // 這裡是 /topvideos 的後台管理頁面
 
 class TopVideosController extends Controller
@@ -71,6 +75,9 @@ class TopVideosController extends Controller
             'duration' => $request->duration,
             'type' => $request->type
         ]);
+
+        //寄出影片上傳完成的通知信
+        Mail::to('tpesluckyt@gmail.com')->send(new NewVideosComplete);
 
         //單純重新導向(送出新的request)到後台列表頁
         return redirect('/topvideos');
