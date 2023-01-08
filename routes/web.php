@@ -82,14 +82,14 @@ Route::get('/cyberworld', [NewsController::class, 'index']);
 
 
 //老師的混合版本(部分參考RESTful API，並仍能直接操作自動生成的Controller)
-Route::prefix('/topvideos')->group(function(){
+Route::prefix('/topvideos')->group(function () {
     // 這裡是 /topvideos 的後台管理頁面
-    Route::get('/', [TopVideosController::class, 'index']);//總表,列表頁
-    Route::get('/create', [TopVideosController::class, 'create']);//新增頁
-    Route::post('/store', [TopVideosController::class, 'store']);//儲存功能
-    Route::get('/edit/{id}', [TopVideosController::class, 'edit']);//編輯頁(老師傾向於編輯頁獨立一頁路徑畫面。每個人設計習慣不同)
-    Route::post('/update/{id}', [TopVideosController::class, 'update']);//更新
-    Route::get('/delete/{id}', [TopVideosController::class, 'destroy']);//刪除
+    Route::get('/', [TopVideosController::class, 'index']); //總表,列表頁
+    Route::get('/create', [TopVideosController::class, 'create']); //新增頁
+    Route::post('/store', [TopVideosController::class, 'store']); //儲存功能
+    Route::get('/edit/{id}', [TopVideosController::class, 'edit']); //編輯頁(老師傾向於編輯頁獨立一頁路徑畫面。每個人設計習慣不同)
+    Route::post('/update/{id}', [TopVideosController::class, 'update']); //更新
+    Route::post('/delete/{id}', [TopVideosController::class, 'destroy']); //刪除
 });
 
 

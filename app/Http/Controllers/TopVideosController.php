@@ -21,10 +21,11 @@ class TopVideosController extends Controller
      */
     public function index()
     {
-        //讓Model從資料庫撈東西在回傳到管理後台頁面
+
         $topvideos = Topvideo::get();
         // dd($topvideos);
 
+        //讓Model從資料庫撈回"所有東西"($topvideos)並回傳到管理後台列表頁上去做blade的套版插入
         return view('topvideo.index', ['topvideos' => $topvideos]);
     }
 
@@ -35,7 +36,7 @@ class TopVideosController extends Controller
      */
     public function create()
     {
-        //
+        //開啟新增頁面
         return view('topvideo.create');
     }
 
@@ -71,6 +72,7 @@ class TopVideosController extends Controller
             'type' => $request->type
         ]);
 
+        //單純重新導向(送出新的request)到後台列表頁
         return redirect('/topvideos');
     }
 
@@ -93,8 +95,10 @@ class TopVideosController extends Controller
      */
     public function edit($id)
     {
-        // dd($id);
+        //根據id找到想編輯的資料，然後將資料回傳給blade頁面給用戶操作
         $edit_topvideo = Topvideo::find($id);
+
+        //開啟編輯頁並將撈到的資料全部傳送過去blade頁面
         return view('topvideo.edit', compact('edit_topvideo'));
     }
 
@@ -150,6 +154,7 @@ class TopVideosController extends Controller
             ]);
         }
 
+        //單純重新導向(送出新的request)到後台列表頁
         return redirect('/topvideos');
     }
 
@@ -163,13 +168,19 @@ class TopVideosController extends Controller
     {
         // dd($id);
 
-        $top_video = Topvideo::find($id);
+        //原則:先把真正資料刪完再刪資料庫，否則紀錄路徑的數據會遺失就找不到東西的位置
+        $top_video_old = Topvideo::find($id);
+
+        //刪除資料夾內的檔案
+        $delete_target = str_replace('/storage', 'public', $top_video_old->src);
+        Storage::disk('local')->delete($delete_target);
 
         //刪除資料表內的該筆資料
         Topvideo::where('id', $id)->delete();
-        //刪除資料夾內的檔案
-        Storage::delete($top_video->src);
 
+        // dd($delete_target, $top_video_old->src);
+
+        //單純重新導向(送出新的request)到後台列表頁
         return redirect('/topvideos');
     }
 }

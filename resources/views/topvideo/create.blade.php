@@ -102,6 +102,12 @@
             margin: 2% 0;
         }
 
+        button {
+            width: 100%;
+            height: 2.5rem;
+            margin: 2% 0;
+        }
+
         .submit_btn {
             width: 100%;
             display: flex;
@@ -119,7 +125,7 @@
         }
 
         .reset {
-            width: 10%;
+            width: auto;
             color: white;
             background-color: red;
             margin: 1%;
@@ -183,8 +189,9 @@
                         <input type="number" name="duration" id="duration">
 
                         <div class="submit_btn">
-                            <input class="submit" type="submit" value="新增TopVideo">
-                            <input class="reset" type="reset" value="取消">
+                            {{-- 取消是藉由Js跳轉回列表頁 --}}
+                            <button class="reset" type="reset" onclick="location.href='/topvideos'">取消</button>
+                            <button class="submit" type="submit">送出</button>
                         </div>
                     </section>
                 </form>

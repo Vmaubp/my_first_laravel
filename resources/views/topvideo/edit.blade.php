@@ -150,6 +150,12 @@
             height: 2.5rem;
         }
 
+        button {
+            width: 100%;
+            height: 2.5rem;
+            margin: 2% 0;
+        }
+
         h1 {
             margin: 2% 0;
         }
@@ -233,8 +239,8 @@
                         <input type="text" value="{{ $edit_topvideo->type }}" name="title"> --}}
 
                         <div class="submit_btn">
-                            <input class="submit" type="submit" value="送出">
-                            <input class="reset" type="reset" value="清除">
+                            <button class="reset" type="reset" onclick="location.href='/topvideos'">取消</button>
+                            <button class="submit" type="submit">送出</button>
                         </div>
                     </section>
                 </form>

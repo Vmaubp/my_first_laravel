@@ -11,9 +11,10 @@
     {{-- 載入datatable(需要依賴在Jquery版本) --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
     <style>
-        *{
+        * {
             box-sizing: border-box;
         }
+
         .comment {
             width: 100%;
             /* height: auto; */
@@ -87,7 +88,7 @@
             height: auto;
         }
 
-        td:nth-child(6) a{
+        td:nth-child(6) a {
             width: 100%;
             font-size: 1rem;
             color: white;
@@ -162,47 +163,65 @@
     <main>
         <div class="comment">
             <div class="container">
-                <form class="form" action="" method="get">
-                    {{-- action和methon需跟route對應 --}}
-                    <div class="form-title">
-                        <h1>TopVideos 影片管理</h1>
-                        <a href="/topvideos/create">新增TopVideos</a>
-                    </div>
-                    <section>
-                        {{-- //這裡是TopVideos的管理後台頁面 --}}
-                        <table id="topvideos_table" class="display">
-                            <thead>
-                                <tr>
-                                    <th>預覽</th>
-                                    <th>名稱</th>
-                                    <th>類型</th>
-                                    <th>長度(秒)</th>
-                                    <th>權重</th>
-                                    <th>功能</th>
-                                </tr>
-                            </thead>
 
-                            <tbody>
-                                {{-- 使用blade的template動態生成資料庫影片清單 --}}
-                                @foreach ($topvideos as $topvideo)
-                                    <tr>
-                                        <td class="posrtr_videos">
-                                            <video src="{{ $topvideo->src }}"></video>
-                                        </td>
-                                        <td>{{ $topvideo->title }}</td>
-                                        <td>{{ $topvideo->type }}</td>
-                                        <td>{{ $topvideo->duration }}秒</td>
-                                        <td>{{ $topvideo->weight }}</td>
-                                        <td>
-                                            <a href="/topvideos/edit/{{ $topvideo->id }}" class="btn-edit">編輯</a>
-                                            <a href="/topvideos/delete/{{ $topvideo->id }}" class="btn-delete">刪除</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </section>
-                </form>
+                {{-- 下面提交鈕是使用button的onclick事件呼叫Route，這裡的action不能是空值否則會干擾造成跳轉失敗 --}}
+                {{-- <form class="form" action="#" method="get"> --}}
+
+                {{-- @csrf --}}
+
+                {{-- action和methon需跟route對應 --}}
+                <div class="form-title">
+                    <h1>TopVideos 影片管理</h1>
+                    <a href="/topvideos/create">新增TopVideos</a>
+                </div>
+                <section>
+                    {{-- //這裡是TopVideos的管理後台頁面 --}}
+                    <table id="topvideos_table" class="display">
+                        <thead>
+                            <tr>
+                                <th>預覽</th>
+                                <th>名稱</th>
+                                <th>類型</th>
+                                <th>長度(秒)</th>
+                                <th>權重</th>
+                                <th>功能</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {{-- 使用blade的template動態生成資料庫影片清單 --}}
+                            @foreach ($topvideos as $topvideo)
+                                <tr>
+                                    <td class="posrtr_videos">
+                                        <video src="{{ $topvideo->src }}"></video>
+                                    </td>
+                                    <td>{{ $topvideo->title }}</td>
+                                    <td>{{ $topvideo->type }}</td>
+                                    <td>{{ $topvideo->duration }}秒</td>
+                                    <td>{{ $topvideo->weight }}</td>
+                                    <td>
+                                        {{-- <a class="btn-edit" href="/topvideos/edit/{{ $topvideo->id }}">編輯</button> --}}
+                                        <button class="btn-edit"
+                                            onclick="location.href='/topvideos/edit/{{ $topvideo->id }};'">編輯</button>
+
+                                        {{-- 點擊本按鈕將會觸發Js事件去執行指定表單的submit功能(改用post方法submit而不是get) --}}
+                                        <button class="btn-delete"
+                                            onclick="document.querySelector('#deleteForm{{ $topvideo->id }}').submit();">刪除</button>
+
+                                        {{-- 做一個隱藏表單專門給需要post方法的delete路由使用 --}}
+                                        <form action="/topvideos/delete/{{ $topvideo->id }}" method="post" hidden
+                                            id="deleteForm{{ $topvideo->id }}">
+
+                                            @csrf
+
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </section>
+                {{-- </form> --}}
             </div>
         </div>
     </main>
